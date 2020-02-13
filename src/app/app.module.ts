@@ -16,7 +16,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule, NgbModule, NgbDropdownModule, HttpClientModule, FormsModule,
     AgmCoreModule.forRoot({
-      apiKey: "AIzaSyCOKYU4Tgwp18z9Aghtwgmbq92WdJQEpaY"
+      apiKey: "Add Google API Key here"
     })
   ],
   providers: [],
