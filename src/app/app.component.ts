@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   stateCities=[];
   markers = [];
   labelname : string;
+  previous;
 
   ngOnInit(){
   this.getCityData();
@@ -72,8 +73,12 @@ export class AppComponent implements OnInit {
   }
 
   //show the city name when clicked on marker
-  clickedMarker(label: string) {
+  clickedMarker(label: string,infowindow) {
     this.labelname = label;
+    if (this.previous) {
+      this.previous.close();
+  }
+  this.previous = infowindow;
   }
   
 

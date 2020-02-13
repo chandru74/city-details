@@ -24,8 +24,8 @@
    <div class="col-md-12 col-lg-6">
     <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
       <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng" 
-      (markerClick)="clickedMarker(m.label)">
-        <agm-info-window>
+      (markerClick)="clickedMarker(m.label,infowindow)">
+        <agm-info-window #infowindow>
           <strong>{{labelname}}</strong>
         </agm-info-window>
       </agm-marker>
