@@ -16,12 +16,15 @@ export class AppComponent implements OnInit {
   constructor(private detailsService: DetailsService){}
   citydetails :City[];
   states = [];
-  stateCities;
+  stateCities=[];
+  markers = [];
+  labelname : string;
 
   ngOnInit(){
   this.getCityData();
   }
 
+  //to get the city data from the give API and get the States list
   getCityData(){
     this.detailsService.getCityData().subscribe((data)=>{
       this.citydetails = data;      
@@ -33,6 +36,7 @@ export class AppComponent implements OnInit {
     })
   }
 
+  // to extract list of cities of a selected state
   selectedState(event){
     this.stateCities = [];
     console.log(event.target.value);
@@ -50,7 +54,7 @@ export class AppComponent implements OnInit {
     this.initMap();
   }
 
-  markers = [];
+// get the coordinates of the cities and add to markers array
   initMap(){
     this.markers = []
     for(let i=0; i<this.stateCities.length; i++){
@@ -65,10 +69,9 @@ export class AppComponent implements OnInit {
         }
       })
     }
-    console.log(this.markers);
   }
 
-  labelname : string;
+  //show the city name when clicked on marker
   clickedMarker(label: string) {
     this.labelname = label;
   }
