@@ -16,7 +16,7 @@ export class DetailsService {
     return this.http.get<City[]>(this.url)
   }
 
-  getCoordinates(city): Observable<GeoCodeData>{
-    return this.http.get<GeoCodeData>("https://maps.googleapis.com/maps/api/geocode/json?address=" + city +"&key=AIzaSyCOKYU4Tgwp18z9Aghtwgmbq92WdJQEpaY")
+  getCoordinates(city, state): Observable<GeoCodeData>{
+    return this.http.get<GeoCodeData>("https://maps.googleapis.com/maps/api/geocode/json?address=" + city + ','+ state +"&key=Google API Key")
   }
 }

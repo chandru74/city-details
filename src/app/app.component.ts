@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   markers = [];
   labelname : string;
   previous;
+  selectFromState: string = 'Select a State';
 
   ngOnInit(){
   this.getCityData();
@@ -40,8 +41,9 @@ export class AppComponent implements OnInit {
   // to extract list of cities of a selected state
   selectedState(event){
     this.stateCities = [];
+    this.selectFromState = event.target.value;
     console.log(event.target.value);
-    this.detailsService.getCoordinates(event.target.value).subscribe(data =>{
+    this.detailsService.getCoordinates(event.target.value,null).subscribe(data =>{
       if(data.status === 'OK'){
         this.lat = data.results[0].geometry.location.lat;
         this.lng = data.results[0].geometry.location.lng;
@@ -59,7 +61,7 @@ export class AppComponent implements OnInit {
   initMap(){
     this.markers = []
     for(let i=0; i<this.stateCities.length; i++){
-      this.detailsService.getCoordinates(this.stateCities[i]).subscribe(data =>{
+      this.detailsService.getCoordinates(this.stateCities[i],this.selectFromState).subscribe(data =>{
         if(data.status === 'OK'){
           let marker ={
             lat: data.results[0].geometry.location.lat,
@@ -81,5 +83,13 @@ export class AppComponent implements OnInit {
   this.previous = infowindow;
   }
   
+  onMouseOver(infoWindow,label: string) {
+    this.labelname = label;
+    infoWindow.open();
+}
+
+onMouseOut(infoWindow) {
+  infoWindow.close();
+}
 
 }

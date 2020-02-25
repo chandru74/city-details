@@ -3,7 +3,7 @@
 <div class="row mt-2">
     <div class="col">
       <div ngbDropdown class="d-inline-block">
-        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Select a State</button>
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{selectFromState}}</button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
           <div *ngFor="let state of states" >
               <button ngbDropdownItem [value]="state" (click)="selectedState($event)">{{state}}</button>
@@ -24,7 +24,8 @@
    <div class="col-md-12 col-lg-6">
     <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
       <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng" 
-      (markerClick)="clickedMarker(m.label,infowindow)">
+      (markerClick)="clickedMarker(m.label,infowindow)" 
+      (mouseOver)="onMouseOver(infowindow, m.label)" (mouseOut)="onMouseOut(infowindow)">
         <agm-info-window #infowindow>
           <strong>{{labelname}}</strong>
         </agm-info-window>
